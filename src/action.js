@@ -317,6 +317,43 @@ class libraAllSvUtil {
             this.set_text(comment_obj, "判定すべき対象コンテンツが使用されていない");
         }
     }
+
+    table_NG2NA() {
+        var arr = this.init_datas();
+        for(var i=0; i<arr.length; i++) {
+            if(i == 0) continue;
+            var row = arr.item(i);
+            var survey_obj = this.survey_obj(row);
+            var comment_obj = this.comment_obj(row);
+            var description_obj = this.description_obj(row);
+            var srccode_obj = this.srccode_obj(row);
+            var cr_sv = this.get_survey(survey_obj);
+            if(cr_sv == "FAIL") {
+                this.set_survey(survey_obj, "NA");
+                this.set_text(comment_obj, "判定すべき対象コンテンツが使用されていない");
+            }
+        }
+    }
+    
+    table_NG2TK() {
+        var arr = this.init_datas();
+        for(var i=0; i<arr.length; i++) {
+            if(i == 0) continue;
+            var row = arr.item(i);
+            var survey_obj = this.survey_obj(row);
+            var comment_obj = this.comment_obj(row);
+            var description_obj = this.description_obj(row);
+            var srccode_obj = this.srccode_obj(row);
+            var cr_sv = this.get_survey(survey_obj);
+            if(cr_sv == "FAIL") {
+                this.set_survey(survey_obj, "PASS2");
+                if(this.get_text(comment_obj) == "") this.set_text(comment_obj, "*");
+                if(this.get_text(description_obj) == "") this.set_text(description_obj, "*");
+                this.set_text(srccode_obj, "");
+            }
+        }
+    }
+
 }
 
 //一括検査ユーティリティクラスのインスタンス
@@ -338,8 +375,14 @@ browser.runtime.onMessage.addListener((message) => {
         case "table-na":
             allSvUtil.table_NA();
             break;
+        case "table-ng2na":
+            allSvUtil.table_NG2NA();
+            break;
+        case "table-ng2tk":
+            allSvUtil.table_NG2TK();
+            break;
         default:
             break;
     }
-    
+
 });
