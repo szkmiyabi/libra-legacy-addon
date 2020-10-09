@@ -57,3 +57,13 @@ document.getElementById("table-ng2tk").addEventListener("click", (e) => {
     })
     .catch(console.error("error"));
 });
+
+document.getElementById("run-js").addEventListener("click", (e) => {
+    browser.tabs.query({active: true, currentWindow: true})
+    .then((tabs) => {
+        browser.tabs.sendMessage(tabs[0].id, {
+            command: "run-js"
+        });
+    })
+    .catch(console.error("error"));
+});

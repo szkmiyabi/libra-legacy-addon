@@ -359,6 +359,12 @@ class libraAllSvUtil {
 //一括検査ユーティリティクラスのインスタンス
 const allSvUtil = new libraAllSvUtil();
 
+//JSインスタント実行関数
+const instantJS = function() {
+    var src = prompt("実行したいJavascriptコードを入力または貼り付けてください");
+    eval("{" + src + "}");
+};
+
 browser.runtime.onMessage.addListener((message) => {
 
     let cmd = message.command;
@@ -380,6 +386,9 @@ browser.runtime.onMessage.addListener((message) => {
             break;
         case "table-ng2tk":
             allSvUtil.table_NG2TK();
+            break;
+        case "run-js":
+            instantJS();
             break;
         default:
             break;
