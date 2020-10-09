@@ -1,0 +1,21 @@
+html, body {
+    width: 450px;
+}
+
+#popup-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#popup-content div {
+    margin-right: 10px;
+}
+
+#popup-content div i {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#popup-content div span {
+    font-size: 15px;
+}
