@@ -1,0 +1,31 @@
+{
+    "manifest_version": 2,
+    "name": "libra-legacy-addon",
+    "version": "0.0.0",
+    "description": "this addon is the Legacy Libra utility.",
+    "icons": {
+        //"48": "icons/libraps-icon.png"
+    },
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["/action.js"]
+        }
+    ],
+    "permission": [
+        "<all_urls>",
+        "tabs"
+    ],
+    "page_action": {
+        "browser_style": false,
+        "default_icon": {
+            //"19": "icons/libraps-icon-19.png",
+            //"38": "icons/libraps-icon-38.png"
+        },
+        "default_title": "Libra Legacy Utility",
+        "default_popup": "popup/choose.html"
+    }
+}
