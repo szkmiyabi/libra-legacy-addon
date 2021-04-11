@@ -67,3 +67,23 @@ document.getElementById("run-js").addEventListener("click", (e) => {
     })
     .catch(console.error("error"));
 });
+
+document.getElementById("sv-extended").addEventListener("click", (e) => {
+    browser.tabs.query({active: true, currentWindow: true})
+    .then((tabs) => {
+        browser.tabs.sendMessage(tabs[0].id, {
+            command: "sv-extended"
+        });
+    })
+    .catch(console.error("error"));
+});
+
+document.getElementById("repo-util").addEventListener("click", (e) => {
+    browser.tabs.query({active: true, currentWindow: true})
+    .then((tabs) => {
+        browser.tabs.sendMessage(tabs[0].id, {
+            command: "repo-util"
+        });
+    })
+    .catch(console.error("error"));
+});
