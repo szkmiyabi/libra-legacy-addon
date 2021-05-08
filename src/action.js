@@ -368,14 +368,18 @@ const instantJS = function() {
 //単一検査画面機能拡張ユーティリティ関数
 const llb_sv_ui_tool = function() {
 	var add_btn = document.getElementById("addcomment");
+    var comment_ta = document.querySelector(`#comments`);
 	var description_ta = document.querySelector(`#description`);
 	var srccode_ta = document.querySelector(`#srccode`);
 
+    var br = document.createElement("br");
+    add_btn.parentElement.insertBefore(br, add_btn.nextSibling);
+
 	var btn = document.createElement("a");
-	btn.innerHTML = `<span class="diag_sample_btn" style="float: left;margin-left:10px;cursor:pointer;font-size:75%;background-color:#006DA4"">再検OK</span>`;
+	btn.innerHTML = `<span class="diag_sample_btn" style="float: left;cursor:pointer;font-size:75%;background-color:#006DA4"">再検OK</span>`;
 	btn.setAttribute("id", `svupd_ok_btn`);
 	btn.setAttribute("href", `javascript:void(0)`);
-	var btn_scr1 = `
+	var btn_scr = `
 		(function(){
 			var src = document.querySelector('#comments');
 			var today = new Date();
@@ -389,15 +393,15 @@ const llb_sv_ui_tool = function() {
 			rds[0].click();
 		})();
 	`;
-	btn.setAttribute("onclick", btn_scr1);
-	add_btn.parentElement.insertBefore(btn, add_btn.nextSibling);
+	btn.setAttribute("onclick", btn_scr);
+	comment_ta.parentElement.insertBefore(btn, comment_ta);
 
-	var btn1 = document.querySelector("#svupd_ok_btn");
-	var btn = document.createElement("a");
+	bf_btn = document.querySelector("#svupd_ok_btn");
+	btn = document.createElement("a");
 	btn.innerHTML = `<span class="diag_sample_btn" style="float: left;margin-left:10px;cursor:pointer;font-size:75%;background-color:#006DA4;margin-left:3px">再検注記</span>`;
 	btn.setAttribute("id", `svupd_tk_btn`);
 	btn.setAttribute("href", `javascript:void(0)`);
-	var btn_scr2 = `
+	btn_scr = `
 		(function(){
 			var src = document.querySelector('#comments');
 			var today = new Date();
@@ -411,28 +415,54 @@ const llb_sv_ui_tool = function() {
 			rds[1].click();
 		})();
 	`;
-	btn.setAttribute("onclick", btn_scr2);
-	btn1.parentElement.insertBefore(btn, btn1.nextSibling);
+	btn.setAttribute("onclick", btn_scr);
+	bf_btn.parentElement.insertBefore(btn, bf_btn.nextSibling);
 
-	var btn2 = document.querySelector("#svupd_tk_btn");
-	var btn = document.createElement("a");
+    bf_btn = document.querySelector(`#svupd_tk_btn`);
+    btn = document.createElement("a");
+	btn.innerHTML = `<span class="diag_sample_btn" style="float: left;margin-left:10px;cursor:pointer;font-size:75%;background-color:#006DA4;margin-left:3px">再検NA</span>`;
+	btn.setAttribute("id", `svupd_na_btn`);
+	btn.setAttribute("href", `javascript:void(0)`);
+	btn_scr = `
+		(function(){
+            var src = document.querySelector('#comments');
+            var descript_old = document.querySelector('#description').value;
+            var srccode_old = document.querySelector('#srccode').value;
+			var today = new Date();
+			var m = today.getMonth()+1;
+			var d = today.getDate();
+			var addtxt = m + '/' + d + ' 非適用に差替\\r\\n' + '---' + '\\r\\n\\r\\n';
+			var sentence = src.value;
+			sentence = addtxt + sentence;
+			var rds = document.getElementsByName("result");
+			rds[3].click();
+            src.value = sentence;
+            document.querySelector('#description').value = descript_old;
+            document.querySelector('#srccode').value = srccode_old;
+		})();
+	`;
+	btn.setAttribute("onclick", btn_scr);
+	bf_btn.parentElement.insertBefore(btn, bf_btn.nextSibling);
+
+	bf_btn = document.querySelector("#svupd_na_btn");
+	btn = document.createElement("a");
 	btn.innerHTML = `<span class="diag_sample_btn" style="float: left;margin-left:10px;cursor:pointer;font-size:75%;background-color:#006DA4;margin-left:3px">クリア</span>`;
 	btn.setAttribute("id", `comment_clear_btn`);
 	btn.setAttribute("href", `javascript:void(0)`);
-	var btn_scr3 = `
+	btn_scr = `
 		(function(){
 			document.querySelector('#comments').value = "";
 		})();
 	`;
-	btn.setAttribute("onclick", btn_scr3);
-	btn2.parentElement.insertBefore(btn, btn2.nextSibling);
+	btn.setAttribute("onclick", btn_scr);
+	bf_btn.parentElement.insertBefore(btn, bf_btn.nextSibling);
 
-	var btn3 = document.querySelector("#comment_clear_btn");
-	var btn = document.createElement("a");
+	bf_btn = document.querySelector("#comment_clear_btn");
+	btn = document.createElement("a");
 	btn.innerHTML = `<span class="diag_sample_btn" style="float: left;margin-left:10px;cursor:pointer;font-size:75%;background-color:#006DA4;margin-left:3px">改行</span>`;
 	btn.setAttribute("id", `comment_br_btn`);
 	btn.setAttribute("href", `javascript:void(0)`);
-	var btn_scr4 = `
+	btn_scr = `
 		(function(){
 			var src = document.querySelector('#comments');
 			var sentence = src.value;
@@ -444,27 +474,27 @@ const llb_sv_ui_tool = function() {
 			src.value = sentence;
 		})();
 	`;
-	btn.setAttribute("onclick", btn_scr4);
-	btn3.parentElement.insertBefore(btn, btn3.nextSibling);
+	btn.setAttribute("onclick", btn_scr);
+	bf_btn.parentElement.insertBefore(btn, bf_btn.nextSibling);
 
-	var btn = document.createElement("a");
+	btn = document.createElement("a");
 	btn.innerHTML = `<span class="diag_sample_btn" style="float: left;margin-left:10px;margin-top:5px;cursor:pointer;font-size:75%;background-color:#006DA4;margin-left:3px">クリア</span>`;
 	btn.setAttribute("id", `description_clear_btn`);
 	btn.setAttribute("href", `javascript:void(0)`);
-	var btn_scr1 = `
+	btn_scr = `
 		(function(){
 			document.querySelector('#description').value = "";
 		})();
 	`;
-	btn.setAttribute("onclick", btn_scr1);
+	btn.setAttribute("onclick", btn_scr);
 	description_ta.parentElement.insertBefore(btn, description_ta);
 
-	var btn1 = document.querySelector(`#description_clear_btn`);
-	var btn = document.createElement("a");
+	bf_btn = document.querySelector(`#description_clear_btn`);
+	btn = document.createElement("a");
 	btn.innerHTML = `<span class="diag_sample_btn" style="float: left;margin-left:10px;margin-top:5px;cursor:pointer;font-size:75%;background-color:#006DA4;margin-left:3px">改行</span>`;
 	btn.setAttribute("id", `description_br_btn`);
 	btn.setAttribute("href", `javascript:void(0)`);
-	var btn_scr2 = `
+	btn_scr = `
 		(function(){
 			var src = document.querySelector('#description');
 			var sentence = src.value;
@@ -476,27 +506,27 @@ const llb_sv_ui_tool = function() {
 			src.value = sentence;
 		})();
 	`;
-	btn.setAttribute("onclick", btn_scr2);
-	btn1.parentElement.insertBefore(btn, btn1.nextSibling);
+	btn.setAttribute("onclick", btn_scr);
+	bf_btn.parentElement.insertBefore(btn, bf_btn.nextSibling);
 
-	var btn = document.createElement("a");
+	btn = document.createElement("a");
 	btn.innerHTML = `<span class="diag_sample_btn" style="float: left;margin-left:10px;margin-top:5px;cursor:pointer;font-size:75%;background-color:#006DA4;margin-left:3px">クリア</span>`;
 	btn.setAttribute("id", `srccode_clear_btn`);
 	btn.setAttribute("href", `javascript:void(0)`);
-	var btn_scr1 = `
+	btn_scr = `
 		(function(){
 			document.querySelector('#srccode').value = "";
 		})();
 	`;
-	btn.setAttribute("onclick", btn_scr1);
+	btn.setAttribute("onclick", btn_scr);
 	srccode_ta.parentElement.insertBefore(btn, srccode_ta);
 
-	var btn1 = document.querySelector(`#srccode_clear_btn`);
-	var btn = document.createElement("a");
+	bf_btn = document.querySelector(`#srccode_clear_btn`);
+	btn = document.createElement("a");
 	btn.innerHTML = `<span class="diag_sample_btn" style="float: left;margin-left:10px;margin-top:5px;cursor:pointer;font-size:75%;background-color:#006DA4;margin-left:3px">改行</span>`;
 	btn.setAttribute("id", `srccode_br_btn`);
 	btn.setAttribute("href", `javascript:void(0)`);
-	var btn_scr2 = `
+	var btn_scr = `
 		(function(){
 			var src = document.querySelector('#srccode');
 			var sentence = src.value;
@@ -508,8 +538,8 @@ const llb_sv_ui_tool = function() {
 			src.value = sentence;
 		})();
 	`;
-	btn.setAttribute("onclick", btn_scr2);
-	btn1.parentElement.insertBefore(btn, btn1.nextSibling);
+	btn.setAttribute("onclick", btn_scr);
+	bf_btn.parentElement.insertBefore(btn, bf_btn.nextSibling);
 };
 
 //検査結果確認用画面ユーティリティ

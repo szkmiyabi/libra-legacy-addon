@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "libra-legacy-addon",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "this addon is the Legacy Libra utility.",
     "icons": {
         "48": "icons/libra-legacy-icon.png"
